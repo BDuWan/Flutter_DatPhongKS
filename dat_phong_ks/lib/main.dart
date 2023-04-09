@@ -1,29 +1,16 @@
 import 'package:flutter/material.dart';
 
+void main() => runApp(const MyApp());
+
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return const MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('My App'),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Chào mừng đến với ứng dụng Flutter của tôi!',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Hành động khi nhấn nút bấm
-              },
-              child: Text('Nhấn vào đây'),
-            ),
-          ],
+        body: Center(
+          child: Text('Chào mừng đến với Flutter!!'),
         ),
       ),
     );
