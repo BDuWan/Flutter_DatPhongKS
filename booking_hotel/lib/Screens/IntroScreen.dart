@@ -44,7 +44,7 @@ class IntroScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: const Text(
                   style: TextStyle1,
-                  'Chào mừng đến với Nhóm 11',
+                  'Chào mừng đến với Nhóm 14',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -59,15 +59,17 @@ class IntroScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextButton.icon(
+                      key: const Key('loginButton'),
                       onPressed: () {
-                        Helper.nextPage(context, LoginScreen());
+                        Helper.nextPage(context, const LoginScreen());
                       },
                       icon: const Icon(Icons.login),
                       label: const Text(style: TextStyle2, 'Đăng nhập'),
                     ),
                     TextButton.icon(
+                      key: const Key('registerButton'),
                       onPressed:(){
-                        Helper.nextPage(context, RegisterScreen());
+                        Helper.nextPage(context, const RegisterScreen());
                       },
                       icon: const Icon(Icons.app_registration),
                       label: const Text(style: TextStyle2, 'Đăng kí'),

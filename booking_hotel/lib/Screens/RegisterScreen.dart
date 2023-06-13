@@ -3,6 +3,7 @@ import 'package:booking_hotel/Screens/LoginScreen.dart';
 import 'package:booking_hotel/dialog/LoadingDialog.dart';
 import 'package:booking_hotel/dialog/MsgDialog.dart';
 import 'package:booking_hotel/fire_base/fire_base_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -31,6 +32,12 @@ class _RegisterBodyState extends State<RegisterBody> {
   String address = '';
   String password = '';
   String repassword = '';
+  TextEditingController emailController = TextEditingController();
+  TextEditingController fullnameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController repasswordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
   @override
@@ -55,6 +62,8 @@ class _RegisterBodyState extends State<RegisterBody> {
                 height: 10,
               ),
               TextFormField(
+                key: const Key('emailField'),
+                controller: emailController,
                 onChanged: (value) {
                   setState(() {
                     email = value;
@@ -82,6 +91,8 @@ class _RegisterBodyState extends State<RegisterBody> {
                 height: 10,
               ),
               TextFormField(
+                key: const Key('fullnameField'),
+                controller: fullnameController,
                 onChanged: (value) {
                   setState(() {
                     fullname = value;
@@ -109,6 +120,8 @@ class _RegisterBodyState extends State<RegisterBody> {
                 height: 10,
               ),
               TextFormField(
+                key: const Key('phoneField'),
+                controller: phoneController,
                 onChanged: (value) {
                   setState(() {
                     phone = value;
@@ -136,6 +149,8 @@ class _RegisterBodyState extends State<RegisterBody> {
                 height: 10,
               ),
               TextFormField(
+                key: const Key('addressField'),
+                controller: addressController,
                 onChanged: (value) {
                   setState(() {
                     address = value;
@@ -163,6 +178,8 @@ class _RegisterBodyState extends State<RegisterBody> {
                 height: 10,
               ),
               TextFormField(
+                key: const Key('passwordField'),
+                controller: passwordController,
                 obscureText: true,
                 onChanged: (value) {
                   setState(() {
@@ -191,6 +208,8 @@ class _RegisterBodyState extends State<RegisterBody> {
                 height: 10,
               ),
               TextFormField(
+                key: const Key('repasswordField'),
+                controller: repasswordController,
                 obscureText: true,
                 onChanged: (value) {
                   setState(() {
@@ -222,6 +241,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                 height: 20,
               ),
               ElevatedButton(
+                key: const Key('registerButton1'),
                 onPressed: () {
                   if (_formkey.currentState!.validate()) {
                     LoadingDialog.showLoadingDialog(context, 'Vui lòng đợi');
@@ -233,7 +253,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                           "Vui lòng đăng nhập để tiếp tục sử dụng dịch vụ");
                     }, (msg) {
                       LoadingDialog.hideLoadingDialog();
-                      MsgDialog.showMsgDialog(context, "Errol", msg);
+                      MsgDialog.showMsgDialog(context, "Error", msg);
                     });
                   }
                 },

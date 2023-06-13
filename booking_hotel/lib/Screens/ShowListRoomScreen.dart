@@ -1,5 +1,6 @@
 import 'package:booking_hotel/Helper.dart';
 import 'package:booking_hotel/Screens/BookingScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_hotel/model/room_model.dart';
 import 'package:booking_hotel/repository/room_repository.dart';
@@ -8,6 +9,8 @@ import 'package:provider/provider.dart';
 import '../providers/provider.dart';
 import 'bottom_navigation.dart';
 
+final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+final RoomRepository roomRepository = RoomRepository(db: firebaseFirestore);
 class ShowListRoomScreen extends StatefulWidget {
   const ShowListRoomScreen({super.key});
 
@@ -34,9 +37,9 @@ class RoomListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyProvider provider = context.read<MyProvider>();
-    Get.put(RoomRepository());
+    Get.put(roomRepository);
     return FutureBuilder<List<RoomModel>>(
-      future: RoomRepository().getRoomWithQuery(provider.floor,
+      future: roomRepository.getRoomWithQuery(provider.floor,
           provider.capacity, provider.lowcost, provider.highcost),
       builder: (context, snapshot) {
         if (snapshot.hasData) {

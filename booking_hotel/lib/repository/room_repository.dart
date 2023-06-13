@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 class RoomRepository extends GetxController{
   static RoomRepository get instance => Get.find();
 
-  final db = FirebaseFirestore.instance;
-  /*final db;
+  late FirebaseFirestore db;
 
-  RoomRepository({required this.db});*/
+  RoomRepository({required this.db});
+
 
   Future<List<RoomModel>> getListRoomById(String id) async {
     final snapshot = await db
@@ -26,13 +26,6 @@ class RoomRepository extends GetxController{
         .doc(id)
         .get();
     final roomdata = RoomModel.fromSnapShot(snapshot);
-    return roomdata;
-  }
-
-  Future<List<RoomModel>> allRoom() async {
-    final snapshot = await db.collection("rooms").get();
-    final roomdata =
-        snapshot.docs.map((e) => RoomModel.fromSnapShot(e)).toList();
     return roomdata;
   }
 

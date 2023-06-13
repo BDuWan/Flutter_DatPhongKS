@@ -6,7 +6,7 @@ import '../model/bill_model.dart';
 class BillRepository extends GetxController {
   static BillRepository get instance => Get.find();
 
-  final db = FirebaseFirestore.instance;
+  late FirebaseFirestore db = FirebaseFirestore.instance;
 
   createBill(bill, Function onSuccess) async {
     await db

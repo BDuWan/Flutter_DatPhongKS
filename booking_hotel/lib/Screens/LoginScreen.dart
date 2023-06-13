@@ -31,7 +31,9 @@ class _LoginBodyState extends State<LoginBody> {
   String email = '';
   String password = '';
   final _formkey = GlobalKey<FormState>();
+
   get curUID => curUID;
+
   @override
   Widget build(BuildContext context) {
     FireAuth authBloc = FireAuth();
@@ -54,6 +56,7 @@ class _LoginBodyState extends State<LoginBody> {
                 height: 20,
               ),
               TextFormField(
+                key: const Key('emailField'),
                 onChanged: (value) {
                   setState(() {
                     email = value;
@@ -80,6 +83,7 @@ class _LoginBodyState extends State<LoginBody> {
                 height: 10,
               ),
               TextFormField(
+                key: const Key('passwordField'),
                 obscureText: true,
                 onChanged: (value) {
                   setState(() {
@@ -110,19 +114,15 @@ class _LoginBodyState extends State<LoginBody> {
                 onPressed: () {
                   if (_formkey.currentState!.validate()) {
                     LoadingDialog.showLoadingDialog(context, 'Vui lòng đợi');
-                    authBloc.SignIn(
-                        email,
-                        password,
-                        (curUID) {
-                          LoadingDialog.hideLoadingDialog();
-                          MyProvider provider = context.read<MyProvider>();
-                          provider.setCurUserId(curUID);
-                          Helper.nextPage(context, const HomeScreen());
-                        },
-                        (msg) {
-                          LoadingDialog.hideLoadingDialog();
-                          MsgDialog.showMsgDialog(context, "Errol", msg);
-                        });
+                    authBloc.SignIn(email, password, (curUID) {
+                      LoadingDialog.hideLoadingDialog();
+                      MyProvider provider = context.read<MyProvider>();
+                      provider.setCurUserId(curUID);
+                      Helper.nextPage(context, const HomeScreen());
+                    }, (msg) {
+                      LoadingDialog.hideLoadingDialog();
+                      MsgDialog.showMsgDialog(context, "Error", msg);
+                    });
                   }
                 },
                 child: const Text(style: TextStyle(fontSize: 20), 'Đăng nhập'),

@@ -1,5 +1,6 @@
 import 'package:booking_hotel/Helper.dart';
 import 'package:booking_hotel/Screens/BookingScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_hotel/model/room_model.dart';
 import 'package:booking_hotel/repository/room_repository.dart';
@@ -36,9 +37,9 @@ class RoomListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyProvider provider = context.read<MyProvider>();
-    Get.put(RoomRepository());
+    Get.put(RoomRepository(db: FirebaseFirestore.instance));
     return FutureBuilder<List<RoomModel>>(
-      future: RoomRepository().getListRoomById(provider.roomId),
+      future: RoomRepository(db: FirebaseFirestore.instance).getListRoomById(provider.roomId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final rooms = snapshot.data!;
